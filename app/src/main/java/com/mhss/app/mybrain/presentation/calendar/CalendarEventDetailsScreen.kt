@@ -386,12 +386,23 @@ fun EventTimeSection(
                         showDatePicker(start, context) {
                             val newEvent = java.util.Calendar
                                 .getInstance()
+                                // Aca se cambia el año, mes, día y hs de los eventos
                                 .apply {
                                     this[java.util.Calendar.YEAR] = it[java.util.Calendar.YEAR]
+                                    /* NÚMERO ALEATORIO DE MES
+                                    Se obtiene sumando el més actual a un número aleatorio entre 12 menos el mes actual, es decir,
+                                    un número aleatorio entre los meses que quedan del año contando desde el actual.
+                                    Por último, se suma 1 porque el cálculo es de base 0.
+                                     */
                                     this[java.util.Calendar.MONTH] =
-                                        it[java.util.Calendar.MONTH]
+                                        (it.get(java.util.Calendar.MONTH) + kotlin.random.Random.nextInt((12 - it.get(java.util.Calendar.MONTH)).toInt()) + 1).toInt()
+                                    /* NÚMERO ALEATORIO DE DÍA
+                                    Se obtiene un número aleatorio de la resta entre el número
+                                    de días que quedan del mes contando desde el día seleccionado como actual y el día actual.
+                                    Por último, se suma 1 porque el cálculo es de base 0.
+                                     */
                                     this[java.util.Calendar.DAY_OF_MONTH] =
-                                        it[java.util.Calendar.DAY_OF_MONTH]
+                                        (kotlin.random.Random.nextInt((it.getActualMaximum(java.util.Calendar.DAY_OF_MONTH) - it.get(java.util.Calendar.DAY_OF_MONTH) + 1).toInt()) + it.get(java.util.Calendar.DAY_OF_MONTH).toInt())
 
                                     this[java.util.Calendar.HOUR_OF_DAY] =
                                         start[java.util.Calendar.HOUR_OF_DAY]
