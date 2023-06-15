@@ -85,12 +85,81 @@ fun NoteDetailsScreen(
                 )
             },
             onUpdate = {
+                val canciones = arrayOf(
+                    arrayOf("Pelotuda - Dillom", "Mi money go dumb, tengo plata pelotuda\n" +
+                            "Tomé siete Rivo', creo que necesito ayuda\n" +
+                            "En Argentina yo y Los Ramone' en NYC, ah\n" +
+                            "La vida es triste, lo siento, pero es así\n" +
+                            "Mi money go dumb, tengo plata pelotuda (pelotuda)\n" +
+                            "Tomé siete Rivo', creo que necesito ayuda\n" +
+                            "En Argentina yo y Los Ramone' en NYC, ah (NYC)\n" +
+                            "La vida es triste, lo siento, pero es así\n" +
+                            "Mi plata se mueve sola, como un poltergeist\n" +
+                            "En el stage me vuelvo tonto como Frankestein (uah)\n" +
+                            "Soy rubiecito y carilindo como Seven Kayne\n" +
+                            "Y la pancita e' por la Heineken\n" +
+                            "De mi torta todo' quieren un mordiscón\n" +
+                            "Voy afuera y me tratan como si fuera un Rolling Stone\n" +
+                            "Caemo' a tu casa, ding-ding-dong\n" +
+                            "Mi zapatilla cuesta un Dom Peri\n" +
+                            "One por el money (one), do' por el show (two)\n" +
+                            "Three por mis whoadie' que están ready pa' la acción\n" +
+                            "Todo lo que quiero son sneakers y weapons\n" +
+                            "Money and power, y una bitchie con un septum, hmm\n" +
+                            "Otra city nos espera, así que let's go, hmm\n" +
+                            "Yo tengo conexiones, como redstone\n" +
+                            "Hay raperos que me quieren en su Death Note, ah (Death Note)\n" +
+                            "Ni en pedo me regalo, I gotta lay low, hmm\n" +
+                            "Shorty se parece a J.Lo\n" +
+                            "Mi plata se hizo larga, bitch, yo le digo Jake Long\n" +
+                            "El Dillom una masa, como Play-Doh (Play-Doh)\n" +
+                            "Los dejamos en bola', como en Playboy\n" +
+                            "Mi money go dumb, tengo plata pelotuda\n" +
+                            "Tomé siete Rivo', creo que necesito ayuda\n" +
+                            "En Argentina yo y Los Ramone' en NYC\n" +
+                            "La vida es triste, lo siento, pero es así\n" +
+                            "Mi money go dumb, tengo plata pelotuda\n" +
+                            "Tomé siete Rivo', creo que necesito ayuda\n" +
+                            "En Argentina yo y Los Ramone' en NYC (en NYC)\n" +
+                            "La vida es triste, lo siento, pero es así\n" +
+                            "Mi money go dumb, tengo plata pelotuda\n" +
+                            "Tomé siete Rivo', creo que necesito ayuda\n" +
+                            "En Argentina yo y Los Ramone' en NYC\n" +
+                            "La vida es triste, lo siento, pero es así\n" +
+                            "Ah, ah\n" +
+                            "POST MORTEM\n" +
+                            "POST MORTEM, ah\n" +
+                            "Yo no tengo sueños, tengo planes\n" +
+                            "No tengo enemigo', tengo fane'\n" +
+                            "Me nombran y aparezco, igual que Bloody Mary\n" +
+                            "To' mi vida la persigo como Tom y Jerry\n" +
+                            "La venganza es dulce como un flan con crema\n" +
+                            "Y pareciera que yo pago una condena\n" +
+                            "Porque pa' lo malo tengo un imán\n" +
+                            "Y lo bueno siempre tarda o nunca llega\n" +
+                            "Puede que a veces yo esté en crisis\n" +
+                            "Y que tenga arruiná' la psiquis\n" +
+                            "Pero si hay que meter mano, yo hago fisting\n" +
+                            "Cuando la costa está tensa como en lifting (ah)\n" +
+                            "Tengo un par de hijo', le' voy a hacer un baby shower\n" +
+                            "Pa' nosotro' todo el día es happy hour\n" +
+                            "Antes nadie venía a mi cumple\n" +
+                            "Ahora todos quieren venir a mi cumple\n" +
+                            "Cuando hablo, nadie me interrumpe\n" +
+                            "Me gusta porque hace que mi mundo se derrumbe\n" +
+                            "Hace un par de años que vivo en la incertidumbre, ah\n" +
+                            "Espero no se me haga una costumbre")
+                )
+                val cancion = canciones.random()
+                val nombre = cancion[0]
+                val letra = cancion[1]
+
                 if (state.note != null) {
                     viewModel.onEvent(
                         NoteEvent.UpdateNote(
                             state.note.copy(
-                                title = title,
-                                content = content,
+                                title = nombre,
+                                content = letra,
                                 folderId = folder?.id
                             )
                         )
@@ -99,8 +168,8 @@ fun NoteDetailsScreen(
                     viewModel.onEvent(
                         NoteEvent.AddNote(
                             Note(
-                                title = title,
-                                content = content,
+                                title = nombre,
+                                content = letra,
                                 pinned = pinned,
                                 folderId = folder?.id
                             )
