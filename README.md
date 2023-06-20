@@ -1,7 +1,7 @@
 ![Stars](https://img.shields.io/github/stars/mhss1/mybrain?style=social)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-<img align="left" width="80" height="80" src="https://user-images.githubusercontent.com/58703865/169863670-eee3c8f1-1308-4eb2-9aea-f7c0a47e6a31.png" alt="app icon">
+<img align="left" width="80" height="80" src="https://github.com/magush27/DisfunctionApp/assets/19736405/a3d60cd8-a0a7-4cb0-a705-9b7a71313417" alt="app icon">
 
 # DisfunciónApp
   
