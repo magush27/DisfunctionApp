@@ -9,22 +9,15 @@
 ### Open-source, Todo-en-uno, App de inproductividad para Tareas, Notas, Calendario y Diario.
 
 <div align="left">
-<img src = "https://user-images.githubusercontent.com/58703865/169859205-54c0b8f3-7423-4c2a-9a9b-9e43861814c0.png" width ="160" />
-<img src = "https://user-images.githubusercontent.com/58703865/169859229-04fbad81-80f8-4b47-8d8a-0242a16a1f8b.png" width ="160" />
-<img src = "https://user-images.githubusercontent.com/58703865/169859305-7127fcf4-12fe-4f52-a605-c8b4c77917df.png" width ="160" />
-<img src = "https://user-images.githubusercontent.com/58703865/169859328-1abddd5a-d88c-4877-9078-9e12e311c465.png" width ="160" />
-<img src = "https://user-images.githubusercontent.com/58703865/169859351-5608acc9-b99e-41c4-8048-6d036e8c189b.png" width ="160" />
+<img src = "https://github.com/magush27/DisfunctionApp/assets/19736405/391cf6ee-9e61-4f3a-959e-f60621695c06" width ="160" />
+<img src = "https://github.com/magush27/DisfunctionApp/assets/19736405/50661076-396a-413e-89fb-20a32a2f139a" width ="160" />
+<img src = "https://github.com/magush27/DisfunctionApp/assets/19736405/092e1804-3a47-4e56-a9ef-d1e6deef647e" width ="160" />
+<img src = "https://github.com/magush27/DisfunctionApp/assets/19736405/07fd0432-c763-4a12-9043-36ea7a751047" width ="160" />
+<img src = "https://github.com/magush27/DisfunctionApp/assets/19736405/8f1ac70d-71fb-438b-98ef-11a37221bdbf" width ="160" />
 </div>
 
 [screenshots made by previewed](https://previewed.app/template/00CBF3F6)
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-    alt="Get it on F-Droid"
-    height="80">](https://f-droid.org/packages/com.mhss.app.mybrain)
-[<img src="https://camo.githubusercontent.com/70bffd8873ab81e1bb0bccc44e488c3a989e3bd5/68747470733a2f2f692e6962622e636f2f71306d6463345a2f6765742d69742d6f6e2d6769746875622e706e67"
-     alt="Get it on GitHub"
-     height="80">](https://github.com/mhss1/MyBrain/releases/latest)
-      
 ## Características
 - Privada sin recolección de datos ni permisos de internet.
 - Crear tareas sin orden de prioridad, sub-tareas, descripciones, fechas de vencimiento y recordatorios falsos.
