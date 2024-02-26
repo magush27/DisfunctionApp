@@ -8,11 +8,12 @@ import androidx.core.net.toUri
 import androidx.glance.GlanceId
 import androidx.glance.action.ActionParameters
 import androidx.glance.appwidget.action.ActionCallback
+import androidx.glance.appwidget.updateAll
 import com.mhss.app.mybrain.presentation.main.MainActivity
 import com.mhss.app.mybrain.util.Constants
 
 class AddEventAction : ActionCallback {
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val intent = Intent(
             Intent.ACTION_VIEW,
             "${Constants.CALENDAR_DETAILS_SCREEN_URI}/ ".toUri(),
@@ -24,7 +25,7 @@ class AddEventAction : ActionCallback {
 }
 
 class NavigateToCalendarAction : ActionCallback {
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val intent = Intent(
             Intent.ACTION_VIEW,
             Constants.CALENDAR_SCREEN_URI.toUri(),
@@ -36,7 +37,7 @@ class NavigateToCalendarAction : ActionCallback {
 }
 
 class CalendarWidgetItemClick : ActionCallback {
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         parameters[eventJson]?.let {
             val intent = Intent(
                 Intent.ACTION_VIEW,
@@ -50,7 +51,7 @@ class CalendarWidgetItemClick : ActionCallback {
 }
 
 class GoToSettingsAction : ActionCallback {
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.data = Uri.fromParts("package", context.packageName, null)
         context.startActivity(intent)
@@ -58,9 +59,8 @@ class GoToSettingsAction : ActionCallback {
 }
 
 class RefreshCalendarAction : ActionCallback {
-    override suspend fun onRun(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
-        val updateIntent = Intent(context, RefreshCalendarWidgetReceiver::class.java)
-        context.sendBroadcast(updateIntent)
+    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
+        CalendarHomeWidget().updateAll(context)
     }
 }
 
