@@ -21,6 +21,7 @@
     <string name="tasks">Задачи</string>
     <string name="diary">Дневник</string>
     <string name="bookmarks">Закладки</string>
+    <string name="timer">таймер</string>
     <string name="calendar">Календарь</string>
     <string name="add_task">Добавить задачу</string>
     <string name="add_task_to_my_brain">Добавить задачу в My Brain</string>
