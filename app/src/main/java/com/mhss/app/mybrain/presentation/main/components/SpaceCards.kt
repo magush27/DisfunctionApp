@@ -12,10 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
-import com.mhss.app.mybrain.ui.theme.Blue
+import com.mhss.app.mybrain.ui.theme.Black
 
 @Composable
 fun SpaceRegularCard(
@@ -36,16 +37,18 @@ fun SpaceRegularCard(
                 .clickable { onClick() }
                 .aspectRatio(1.0f)
                 .padding(18.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = title, style = MaterialTheme.typography.h5.copy(color = Color.White))
             Image(
                 modifier = Modifier
-                    .size(70.dp)
-                    .align(Alignment.End),
+                    .size(150.dp)
+                    .align(Alignment.CenterHorizontally),
                 painter = painterResource(id = image),
                 contentDescription = title)
-
+            Text(text = title,
+                style = MaterialTheme.typography.h5.copy(color = Color.White),
+                textAlign = TextAlign.Center)
         }
     }
 }
@@ -69,18 +72,18 @@ fun SpaceWideCard(
                 .clickable { onClick() }
                 .padding(18.dp),
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h4.copy(color = Color.White),
-            )
-            Spacer(Modifier.height(12.dp))
             Image(
                 modifier = Modifier
                     .size(80.dp)
                     .align(Alignment.End),
                 painter = painterResource(id = image),
                 contentDescription = title)
-
+            Spacer(Modifier.height(12.dp))
+            Text(
+                text = title,
+                style = MaterialTheme.typography.h4.copy(color = Color.White),
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }
@@ -90,7 +93,7 @@ fun SpaceWideCard(
 fun SpaceRegularCardPreview() {
     SpaceRegularCard(
         "Notes",
-        R.drawable.notes_img,
-        Blue
+        R.drawable.note_disfunction_img,
+        Black
     )
 }
