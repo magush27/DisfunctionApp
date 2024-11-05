@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.SubTask
+import com.mhss.app.mybrain.ui.theme.Green
 
 @Composable
 fun SubTaskItem(
@@ -31,6 +32,7 @@ fun SubTaskItem(
             modifier = Modifier.clickable { onDelete() }
         )
         Checkbox(
+            colors = CheckboxDefaults.colors(uncheckedColor = Green),
             checked = subTask.isCompleted,
             onCheckedChange = { onChange(subTask.copy(isCompleted = it)) },
         )
