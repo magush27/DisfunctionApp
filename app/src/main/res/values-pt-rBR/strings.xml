@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
 
     <string name="reminders_channel_description">Canal de notificação para enviar lembretes de tarefas</string>
     <string name="reminders_channel_name">Lembretes</string>
@@ -24,7 +24,7 @@
     <string name="bookmarks">Favoritos</string>
     <string name="calendar">Agenda</string>
     <string name="add_task">Adicionar tarefa</string>
-    <string name="add_task_to_my_brain">Adicionar tarefa ao My Brain</string>
+    <string name="add_task_to_my_brain">Adicionar tarefa ao DisfuncionApp</string>
     <string name="search">Procurar</string>
     <string name="title">Título</string>
     <string name="delete_sub_task">Remover subtarefa</string>

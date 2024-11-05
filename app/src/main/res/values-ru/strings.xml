@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
 
     <string name="reminders_channel_description">Способ уведомления для напоминаний о задачах</string>
     <string name="reminders_channel_name">Напоминания</string>
@@ -24,7 +24,7 @@
     <string name="timer">таймер</string>
     <string name="calendar">Календарь</string>
     <string name="add_task">Добавить задачу</string>
-    <string name="add_task_to_my_brain">Добавить задачу в My Brain</string>
+    <string name="add_task_to_my_brain">Добавить задачу в DisfuncionApp</string>
     <string name="search">Поиск</string>
     <string name="title">Название</string>
     <string name="delete_sub_task">Удалить подзадачу</string>

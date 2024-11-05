@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
 
     <string name="reminders_channel_description">Kanał powiadomień służący do wysyłania przypomnień wykonania zadań.</string>
     <string name="reminders_channel_name">Przypomnienia</string>
@@ -25,7 +25,7 @@
     <string name="bookmarks">Zakładki</string>
     <string name="calendar">Kalendarz</string>
     <string name="add_task">Dodaj zadanie</string>
-    <string name="add_task_to_my_brain">Dodaj zadanie do My Brain</string>
+    <string name="add_task_to_my_brain">Dodaj zadanie do DisfuncionApp</string>
     <string name="search">Szukaj</string>
     <string name="title">Tytuł</string>
     <string name="delete_sub_task">Usuń podzadanie</string>

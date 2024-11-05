@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
     <string name="reminders_channel_description">任务提醒</string>
     <string name="reminders_channel_name">提醒</string>
     <string name="complete">完成</string>
@@ -24,7 +24,7 @@
     <string name="bookmarks">书签</string>
     <string name="calendar">日历</string>
     <string name="add_task">添加事项</string>
-    <string name="add_task_to_my_brain">添加事项到My Brain</string>
+    <string name="add_task_to_my_brain">添加事项到My DisfuncionApp</string>
     <string name="search">搜索</string>
     <string name="title">标题</string>
     <string name="delete_sub_task">删除子任务</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
 
     <string name="reminders_channel_description">Canal de notificare pentru trimiterea de notificări de reamintire a sarcinilor</string>
     <string name="reminders_channel_name">Mementouri</string>
@@ -24,7 +24,7 @@
     <string name="bookmarks">Marcaje</string>
     <string name="calendar">Calendar</string>
     <string name="add_task">Adaugă sarcină</string>
-    <string name="add_task_to_my_brain">Adaugă sarcina la My Brain</string>
+    <string name="add_task_to_my_brain">Adaugă sarcina la DisfuncionApp</string>
     <string name="search">Caută</string>
     <string name="title">Titlu</string>
     <string name="delete_sub_task">Șterge sub-sarcină</string>

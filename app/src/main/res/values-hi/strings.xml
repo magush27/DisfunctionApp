@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
     <string name="reminders_channel_name">रिमाइंडर्स</string>
     <string name="complete">पूर्ण हुआ</string>
     <string name="dashboard">डैशबोर्ड</string>

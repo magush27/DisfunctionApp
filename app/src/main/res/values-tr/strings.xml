@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Brain</string>
+    <string name="app_name">DisfuncionApp</string>
 
     <string name="reminders_channel_description">Görev hatırlatma bildirimleri için bildirim kanalı</string>
     <string name="reminders_channel_name">Hatırlatıcılar</string>
