@@ -1,10 +1,13 @@
 package com.mhss.app.mybrain.presentation.main
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +26,9 @@ import com.mhss.app.mybrain.presentation.settings.SettingsBasicLinkItem
 import com.mhss.app.mybrain.presentation.settings.SettingsItemCard
 import com.mhss.app.mybrain.presentation.settings.SettingsViewModel
 import com.mhss.app.mybrain.presentation.util.Screen
-import com.mhss.app.mybrain.ui.theme.Rubik
+import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Green
+import com.mhss.app.mybrain.ui.theme.Poppins
 import com.mhss.app.mybrain.util.Constants
 import com.mhss.app.mybrain.util.settings.*
 
@@ -38,10 +43,22 @@ fun SettingsScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.settings),
+                        color = Black,
                         style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
                     )
                 },
-                backgroundColor = MaterialTheme.colors.background,
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Black
+                        )
+                    }
+                },
+                backgroundColor = Green,
                 elevation = 0.dp,
             )
         }
@@ -99,9 +116,9 @@ fun SettingsScreen(
                 val screen = viewModel
                     .getSettings(
                         intPreferencesKey(Constants.APP_FONT_KEY),
-                        Rubik.toInt()
+                        Poppins.toInt()
                     ).collectAsState(
-                        initial = Rubik.toInt()
+                        initial = Poppins.toInt()
                     )
                 AppFontSettingsItem(
                     screen.value,
@@ -313,7 +330,7 @@ fun AppFontSettingsItem(
     var expanded by remember { mutableStateOf(false) }
     val fonts = listOf(
         FontFamily.Default,
-        Rubik,
+        Poppins,
         FontFamily.Monospace,
         FontFamily.SansSerif
     )
