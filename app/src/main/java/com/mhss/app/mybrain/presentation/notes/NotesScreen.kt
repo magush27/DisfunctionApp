@@ -1,5 +1,6 @@
 package com.mhss.app.mybrain.presentation.notes
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -16,6 +17,9 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +35,10 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.flowlayout.FlowRow
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.NoteFolder
+import com.mhss.app.mybrain.presentation.util.BottomNavItem
 import com.mhss.app.mybrain.presentation.util.Screen
+import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.util.Constants
 import com.mhss.app.mybrain.util.settings.*
 
@@ -63,10 +70,22 @@ fun NotesScreen(
                         text = if (selectedTab == 0) stringResource(R.string.notes) else stringResource(
                             R.string.folders
                         ),
+                        color = Black,
                         style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
                     )
                 },
-                backgroundColor = MaterialTheme.colors.background,
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Black
+                        )
+                    }
+                },
+                backgroundColor = Green,
                 elevation = 0.dp,
             )
         },
@@ -87,7 +106,7 @@ fun NotesScreen(
                         openCreateFolderDialog = true
                     }
                 },
-                backgroundColor = MaterialTheme.colors.primary,
+                backgroundColor = Green,
             ) {
                 Icon(
                     modifier = Modifier.size(25.dp),
@@ -95,7 +114,7 @@ fun NotesScreen(
                         R.drawable.ic_create_folder
                     ),
                     contentDescription = stringResource(R.string.add_note),
-                    tint = Color.White
+                    tint = Color.Black
                 )
             }
         },
@@ -391,7 +410,7 @@ fun NoNotesMessage() {
         Spacer(modifier = Modifier.height(12.dp))
         Image(
             modifier = Modifier.size(125.dp),
-            painter = painterResource(id = R.drawable.notes_img),
+            painter = painterResource(id = R.drawable.note_disfunction_img),
             contentDescription = stringResource(R.string.no_notes_message),
             alpha = 0.7f
         )

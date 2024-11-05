@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.Note
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.ui.theme.Orange
 import com.mhss.app.mybrain.util.date.formatDateDependingOnDay
 import dev.jeziellago.compose.markdowntext.MarkdownText
@@ -47,7 +48,7 @@ fun NoteItem(
                     Icon(
                         painter = painterResource(R.drawable.ic_pin_filled),
                         contentDescription = stringResource(R.string.pin_note),
-                        tint = Orange,
+                        tint = Green,
                         modifier = Modifier
                             .size(16.dp)
                     )

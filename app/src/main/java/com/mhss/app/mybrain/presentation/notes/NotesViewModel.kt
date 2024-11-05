@@ -164,7 +164,7 @@ class NotesViewModel @Inject constructor(
         val error: String? = null,
         val noteView: ItemView = ItemView.LIST,
         val navigateUp: Boolean = false,
-        val readingMode: Boolean = true,
+        val readingMode: Boolean = false,
         val searchNotes: List<Note> = emptyList(),
         val folders: List<NoteFolder> = emptyList(),
         val folderNotes: List<Note> = emptyList(),
