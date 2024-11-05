@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.util.Log
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -15,7 +16,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +38,8 @@ import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.Calendar
 import com.mhss.app.mybrain.domain.model.CalendarEvent
 import com.mhss.app.mybrain.presentation.util.Screen
+import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.util.Constants
 import com.mhss.app.mybrain.util.date.*
 import kotlinx.coroutines.launch
@@ -65,25 +70,22 @@ fun CalendarScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.calendar),
+                        color = Black,
                         style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
                     )
                 },
-                actions = {
-                    if (state.events.isNotEmpty()) MonthDropDownMenu(
-                        selectedMonth = month,
-                        months = state.months,
-                        onMonthSelected = { selected ->
-                            scope.launch {
-                                lazyListState.scrollToItem(
-                                    state.events.values.indexOfFirst {
-                                        it.first().start.monthName() == selected
-                                    }
-                                )
-                            }
-                        }
-                    )
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Black
+                        )
+                    }
                 },
-                backgroundColor = MaterialTheme.colors.background,
+                backgroundColor = Green,
                 elevation = 0.dp,
             )
         },
@@ -97,13 +99,13 @@ fun CalendarScreen(
                         )
                     )
                 },
-                backgroundColor = MaterialTheme.colors.primary,
+                backgroundColor = Green,
             ) {
                 Icon(
                     modifier = Modifier.size(25.dp),
                     painter = painterResource(R.drawable.ic_add),
                     contentDescription = stringResource(R.string.add_event),
-                    tint = Color.White
+                    tint = Black
                 )
             }
         },
@@ -130,6 +132,21 @@ fun CalendarScreen(
                             modifier = Modifier.size(25.dp),
                             painter = painterResource(R.drawable.ic_settings_sliders),
                             contentDescription = stringResource(R.string.include_calendars)
+                        )
+                    }
+                    if (state.events.isNotEmpty()) {
+                        MonthDropDownMenu(
+                            selectedMonth = month,
+                            months = state.months,
+                            onMonthSelected = { selected ->
+                                scope.launch {
+                                    lazyListState.scrollToItem(
+                                        state.events.values.indexOfFirst {
+                                            it.first().start.monthName() == selected
+                                        }
+                                    )
+                                }
+                            }
                         )
                     }
                 }
@@ -302,8 +319,8 @@ fun CalendarSettingsSection(
                                     checked = subCalendar.included,
                                     onCheckedChange = { onCalendarClicked(subCalendar) },
                                     colors = CheckboxDefaults.colors(
-                                        uncheckedColor = Color(subCalendar.color),
-                                        checkedColor = Color(subCalendar.color)
+                                        uncheckedColor = Green,
+                                        checkedColor = Green
                                     )
                                 )
                                 Text(

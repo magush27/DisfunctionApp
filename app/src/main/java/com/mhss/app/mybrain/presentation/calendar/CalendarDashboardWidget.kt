@@ -21,6 +21,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.CalendarEvent
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.ui.theme.LightGray
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -38,7 +39,8 @@ fun CalendarDashboardWidget(
         elevation = 8.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        backgroundColor = Green,
     ) {
         val context = LocalContext.current
         val readCalendarPermissionState = rememberPermissionState(
@@ -71,7 +73,7 @@ fun CalendarDashboardWidget(
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(20.dp))
-                    .background(if (isDark) Color.DarkGray else LightGray),
+                    .background(if (isDark) Color.Black else LightGray),
                 contentPadding = PaddingValues(vertical = 10.dp, horizontal = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally

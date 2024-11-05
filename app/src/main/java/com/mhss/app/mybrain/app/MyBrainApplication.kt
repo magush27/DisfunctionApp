@@ -18,7 +18,7 @@ import javax.inject.Inject
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.SETTINGS_PREFERENCES)
 
 @HiltAndroidApp
-class MyBrainApplication : Application(), Configuration.Provider {
+class DisfuncionApp : Application(), Configuration.Provider {
 
     companion object {
         lateinit var appContext: Context
@@ -56,4 +56,4 @@ fun getString(
     @StringRes
     resId: Int,
     vararg args: String
-) = MyBrainApplication.appContext.getString(resId, *args)
+) = DisfuncionApp.appContext.getString(resId, *args)

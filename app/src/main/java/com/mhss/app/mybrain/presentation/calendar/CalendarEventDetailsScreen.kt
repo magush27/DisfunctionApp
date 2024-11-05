@@ -34,6 +34,8 @@ import com.google.gson.Gson
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.Calendar
 import com.mhss.app.mybrain.domain.model.CalendarEvent
+import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.util.calendar.*
 import com.mhss.app.mybrain.util.date.HOUR_IN_MILLIS
 import com.mhss.app.mybrain.util.date.formatDate
@@ -133,7 +135,9 @@ fun CalendarEventDetailsScreen(
                 )
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = {
+                FloatingActionButton(
+                    backgroundColor = Green,
+                    onClick = {
                     val newEvent = CalendarEvent(
                         id = event?.id ?: 0,
                         title = title,
@@ -154,7 +158,8 @@ fun CalendarEventDetailsScreen(
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_save),
-                        contentDescription = stringResource(R.string.add_event)
+                        contentDescription = stringResource(R.string.add_event),
+                        tint = Black,
                     )
                 }
             }
