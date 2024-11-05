@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.SubTask
 import com.mhss.app.mybrain.domain.model.Task
+import com.mhss.app.mybrain.ui.theme.Black
 import com.mhss.app.mybrain.util.date.formatDateDependingOnDay
 import com.mhss.app.mybrain.util.settings.TaskFrequency
 import com.mhss.app.mybrain.util.settings.Priority
@@ -34,6 +35,85 @@ import com.mhss.app.mybrain.util.settings.toInt
 import com.mhss.app.mybrain.util.settings.toPriority
 import com.mhss.app.mybrain.util.settings.toTaskFrequency
 import java.util.*
+
+
+data class Song(val phrase: String, val artist: String)
+
+val songs = listOf(
+    Song("Tener tiempo y perderlo ya, reírme más\n" +
+            "Lo que más quiero es reírme más", "Reirme más - Leo García"),
+    Song("No es nada más que el tiempo\n" +
+            "Se ha puesto más violento entre los dos", "Tiempo - Miranda"),
+    Song("Siempre llego tarde porque me invento la ruta\n" +
+            "Le escupo la cara al tiempo como si fuera mi puta", "Rosalía y Tokischa"),
+    Song("Mayonesa - Intoxicados", "Ayer encontré en la heladera\n" +
+            "Un frasco parecido al de una mayonesa\n" +
+            "De vez en cuando la comía\n" +
+            "De vez en cuando la dejaba ahí donde estaba\n" +
+            "Hasta que un día me di cuenta que esa mayonesa era mi reloj\n" +
+            "Y ese reloj era mi tiempo\n" +
+            "Mi bonito tiempo es que hoy tanto necesito"),
+    Song("Y te pregunto a vos, a vos, a vos\n" +
+            "¿Cuánto dura una hora para vos? ¿Para vos? ¿Para vos?", "Mayonesa - Intoxicados"),
+    Song("Who knows? Only time", "Only time - Enya"),
+    Song("Time Warp - Rocky Horror Picture Show", "With a bit of a mind flip\n" +
+            "You're into the time slip\n" +
+            "And nothing can ever be the same\n" +
+            "You're spaced out on sensation\n" +
+            "Like you're under sedation"),
+    Song("Let's do the Time Warp again", "Time Warp - Rocky Horror Picture Show"),
+    Song("Minutos,son la morgue del tiempo", "Minutos - Ricardo Arjona"),
+    Song("No hay reloj que dé vuelta hacia atrás", "Minutos - Ricardo Arjona"),
+    Song("Tiempo cruel, no perdonas ni a las flores del más bonito jardín", "Luis Miguel - El tiempo"),
+    Song("Nos comimos el tiempo", "Luis Miguel - El tiempo"),
+    Song("Abrazame que el tiempo hiere y el cielo es testigo que el tiempo es cruel y a nadie quiere por eso te digo", "Juan Gabriel - Abrazame muy fuerte"),
+    Song("Abrázame que dios perdona pero el tiempo a ninguno", "Juan Gabriel - Abrazame muy fuerte"),
+    Song("Abrázame que el tiempo es malo y muy cruel amigo", "Juan Gabriel - Abrazame muy fuerte"),
+    Song("If I could turn back time...", "Cher - If I could turn back time"),
+    Song("I've got a suitcase of memories that I almost left behind, time after time", "Cindy Lauper - Time after time"),
+    Song("Bill Haley & His Comets - Rock Around the Clock", "We're gonna rock around the clock tonight\n" +
+            "We're gonna rock, rock, rock, 'til broad daylight\n" +
+            "We're gonna rock, gonna rock, around the clock tonight\n"),
+    Song("And time goes by so slowly and time can do so much",
+        "The Righteous Brothers - Unchained Melody"),
+    Song("Xuxa - Ilarié",
+        "Es la hora, es la hora\n" +
+                "Es la hora de jugar\n" +
+                "Brinca, brinca, palma, palma\n" +
+                "Y danzando sin parar"),
+    Song("Basta de hippies, basta de llorar, ¡estalló el tiempo del metal!",
+        "V8 - Tiempos metálicos"),
+    Song("Tiempo al tiempo, tengo que esperar. Es la idea, suele condenar",
+        "Los Pericos - Pupilas Lejanas"),
+    Song("Time flyes when you are having fun, time flyes when you live on the run",
+        "Weezer - Time Flies"),
+    Song("Que el tiempo pasa despacio pero se puede apurar",
+        "Dani Umpi, Wendy Sulca y Fito Paez - El tiempo pasar"),
+    Song("Lento",
+        "Si quieres un poco de mí\n" +
+                "Me deberías esperar\n" +
+                "Y caminar a paso lento\n" +
+                "Muy lento\n" +
+                "Y poco a poco olvidar\n" +
+                "El tiempo y su velocidad\n" +
+                "Frenar el ritmo, ir muy lento, más lento\n" +
+                "Julieta Venegas - Lento"),
+    Song("Lento",
+        "Sé\n" +
+                "Delicado y espera\n" +
+                "Dame tiempo para darte\n" +
+                "Todo lo que tengo\n" +
+                "Sé\n" +
+                "Delicado y espera\n" +
+                "Dame tiempo para darte\n" +
+                "Todo lo que tengo\n" +
+                "Julieta Venegas - Lento")
+)
+
+// Select random song
+fun getRandomSong(): Song {
+    return songs.random()
+}
 
 @Composable
 fun AddTaskBottomSheetContent(
@@ -255,26 +335,48 @@ fun AddTaskBottomSheetContent(
         )
         Button(
             onClick = {
-                onAddTask(
-                    Task(
-                        title = title,
-                        description = description,
-                        priority = priority.toInt(),
-                        dueDate = if (dueDateExists) dueDate.timeInMillis else 0L,
-                        recurring = recurring,
-                        frequency = frequency,
-                        frequencyAmount = frequencyAmount,
-                        createdDate = System.currentTimeMillis(),
-                        updatedDate = System.currentTimeMillis(),
-                        subTasks = subTasks.toList()
+                if (songs.isNotEmpty()) {
+                    val selectedSong = songs.random() // Select a random song
+                    onAddTask(
+                        Task(
+                            title = selectedSong.phrase, // Replace with song phrase
+                            description = selectedSong.artist, // Replace with song author
+                            priority = priority.toInt(),
+                            dueDate = if (dueDateExists) dueDate.timeInMillis else 0L,
+                            recurring = recurring,
+                            frequency = frequency,
+                            frequencyAmount = frequencyAmount,
+                            createdDate = System.currentTimeMillis(),
+                            updatedDate = System.currentTimeMillis(),
+                            subTasks = subTasks.toList()
+                        )
                     )
-                )
-                title = ""
-                description = ""
-                priority = Priority.LOW
-                dueDate = Calendar.getInstance()
-                dueDateExists = false
-                subTasks.clear()
+                    // Reset fields as needed
+                    title = "" // Optionally clear user input
+                    description = "" // Optionally clear user input
+                    priority = Priority.LOW
+                    dueDate = Calendar.getInstance()
+                    dueDateExists = false
+                    recurring = false
+                    frequency = 0
+                    frequencyAmount = 1
+                    subTasks.clear()
+                } else {
+                    onAddTask(
+                        Task(
+                            title = title, // Replace with song phrase
+                            description = description, // Replace with song author
+                            priority = priority.toInt(),
+                            dueDate = if (dueDateExists) dueDate.timeInMillis else 0L,
+                            recurring = recurring,
+                            frequency = frequency,
+                            frequencyAmount = frequencyAmount,
+                            createdDate = System.currentTimeMillis(),
+                            updatedDate = System.currentTimeMillis(),
+                            subTasks = subTasks.toList()
+                        )
+                    )
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -283,7 +385,7 @@ fun AddTaskBottomSheetContent(
         ) {
             Text(
                 text = stringResource(R.string.add_task),
-                style = MaterialTheme.typography.h6.copy(Color.White)
+                style = MaterialTheme.typography.h6.copy(Color.Black)
             )
         }
         Spacer(modifier = Modifier.height(54.dp))
@@ -306,7 +408,7 @@ fun PriorityTabRow(
     ) {
         priorities.forEachIndexed { index, it ->
             Tab(
-                text = { Text(stringResource(it.title)) },
+                text = { Text(stringResource(it.title), color = Black) },
                 selected = selectedPriority.toInt() == index,
                 onClick = {
                     onChange(index.toPriority())
@@ -323,7 +425,7 @@ fun AnimatedTabIndicator(modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(5.dp)
             .fillMaxSize()
-            .border(BorderStroke(2.dp, Color.White), RoundedCornerShape(8.dp))
+            .border(BorderStroke(2.dp, Color.Black), RoundedCornerShape(8.dp))
     )
 }
 
