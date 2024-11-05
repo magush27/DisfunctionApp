@@ -74,6 +74,7 @@ dependencies {
     implementation("androidx.compose.material:material")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-compose:1.8.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -129,6 +130,9 @@ dependencies {
 
     // DocumentFile
     implementation("androidx.documentfile:documentfile:1.0.1")
+
+    // Zhuinden flow-combinetuple
+    implementation("com.github.Zhuinden:flow-combinetuple-kt:1.1.1")
 }
 
 ksp {
