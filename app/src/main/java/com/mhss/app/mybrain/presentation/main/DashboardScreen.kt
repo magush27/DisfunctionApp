@@ -1,10 +1,13 @@
 package com.mhss.app.mybrain.presentation.main
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,6 +21,8 @@ import com.mhss.app.mybrain.presentation.calendar.CalendarDashboardWidget
 import com.mhss.app.mybrain.presentation.diary.MoodCircularBar
 import com.mhss.app.mybrain.presentation.tasks.TasksDashboardWidget
 import com.mhss.app.mybrain.presentation.util.Screen
+import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.util.Constants
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -33,11 +38,23 @@ fun DashboardScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.dashboard),
+                        color = Black,
                         style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
                     )
                 },
-                backgroundColor = MaterialTheme.colors.background,
-                elevation = 0.dp
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Black
+                        )
+                    }
+                },
+                backgroundColor = Green,
+                elevation = 0.dp,
             )
         }
     ) {paddingValues ->
@@ -112,24 +129,6 @@ fun DashboardScreen(
                         )
                     }
                 )
-            }
-            item {
-                Row {
-                    MoodCircularBar(
-                        entries = viewModel.uiState.dashBoardEntries,
-                        showPercentage = false,
-                        modifier = Modifier.weight(1f, fill = true),
-                        onClick = {
-                            navController.navigate(
-                                Screen.DiaryChartScreen.route
-                            )
-                        }
-                    )
-                    TasksSummaryCard(
-                        modifier = Modifier.weight(1f, fill = true),
-                        tasks = viewModel.uiState.summaryTasks
-                    )
-                }
             }
             item { Spacer(Modifier.height(65.dp)) }
         }
