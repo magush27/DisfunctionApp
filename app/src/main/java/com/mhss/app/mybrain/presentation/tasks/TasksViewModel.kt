@@ -26,6 +26,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class TasksViewModel @Inject constructor(
@@ -155,22 +156,23 @@ class TasksViewModel @Inject constructor(
         val navigateUp: Boolean = false,
         val error: String? = null
     )
-
-     private fun getTasks(order: Order, showCompleted: Boolean) {
+    private fun getTasks(order: Order, showCompleted: Boolean) {
         getTasksJob?.cancel()
         getTasksJob = getAllTasks(order)
             .map { list ->
-                if (showCompleted)
-                    list
-                else
-                    list.filter { !it.isCompleted }
+                list.map { task ->
+                    task.copy(isCompleted = Random.nextBoolean())
+                }.let { modifiedList ->
+                    if (showCompleted) modifiedList else modifiedList.filter { !it.isCompleted }
+                    modifiedList.shuffled()
+                }
             }.onEach { tasks ->
-            tasksUiState = tasksUiState.copy(
-                tasks = tasks,
-                taskOrder = order,
-                showCompletedTasks = showCompleted
-            )
-        }.launchIn(viewModelScope)
+                tasksUiState = tasksUiState.copy(
+                    tasks = tasks,
+                    taskOrder = order,
+                    showCompletedTasks = showCompleted
+                )
+            }.launchIn(viewModelScope)
     }
     private fun searchTasks(query: String){
         searchTasksJob?.cancel()

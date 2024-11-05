@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.Task
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.ui.theme.LightGray
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -39,7 +40,8 @@ fun TasksDashboardWidget(
         elevation = 8.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        backgroundColor = Green,
     ) {
         val isDark = !MaterialTheme.colors.isLight
         Column(
@@ -70,7 +72,7 @@ fun TasksDashboardWidget(
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(20.dp))
-                    .background(if (isDark) Color.DarkGray else LightGray),
+                    .background(if (isDark) Color.Black else LightGray),
                 contentPadding = PaddingValues(vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {

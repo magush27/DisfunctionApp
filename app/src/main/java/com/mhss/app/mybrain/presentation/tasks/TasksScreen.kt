@@ -1,5 +1,6 @@
 package com.mhss.app.mybrain.presentation.tasks
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -9,6 +10,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +28,8 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.flowlayout.FlowRow
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.presentation.util.Screen
+import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.util.Constants
 import com.mhss.app.mybrain.util.settings.Order
 import com.mhss.app.mybrain.util.settings.OrderType
@@ -58,13 +64,25 @@ fun TasksScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.tasks),
+                        color = Black,
                         style = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold)
                     )
                 },
-                backgroundColor = MaterialTheme.colors.background,
+                navigationIcon = {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Black
+                        )
+                    }
+                },
+                backgroundColor = Green,
                 elevation = 0.dp,
             )
-        },
+},
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -79,7 +97,7 @@ fun TasksScreen(
                     modifier = Modifier.size(25.dp),
                     painter = painterResource(R.drawable.ic_add),
                     contentDescription = stringResource(R.string.add_task),
-                    tint = Color.White
+                    tint = Color.Black
                 )
             }
         },
@@ -204,7 +222,7 @@ fun NoTasksMessage(){
         Spacer(modifier = Modifier.height(12.dp))
         Image(
             modifier = Modifier.size(125.dp),
-            painter = painterResource(id = R.drawable.tasks_img),
+            painter = painterResource(id = R.drawable.tasks_disfunction_img),
             contentDescription = stringResource(R.string.no_tasks_message),
             alpha = 0.7f
         )
