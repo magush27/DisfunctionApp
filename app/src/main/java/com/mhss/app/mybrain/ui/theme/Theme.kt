@@ -8,6 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 
+
+const val PrimaryLightAlpha = .25f
+
 private val DarkColorPalette = darkColors(
     primary = PrimaryColor,
     primaryVariant = PrimaryDarkColor,
@@ -22,13 +25,16 @@ private val LightColorPalette = lightColors(
     primary = PrimaryColor,
     primaryVariant = PrimaryDarkColor,
     secondary = SecondaryColor,
-    background = Color.White,
+    surface = DarkGray,
+    background = Color.Black,
+    onSurface = Color.White,
+    onBackground = Color.White
 )
 
 @Composable
 fun MyBrainTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    fontFamily: FontFamily = Rubik,
+    fontFamily: FontFamily = Poppins,
     content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette

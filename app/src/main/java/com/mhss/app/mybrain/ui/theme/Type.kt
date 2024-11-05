@@ -8,9 +8,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.mhss.app.mybrain.R
 
-val Rubik = FontFamily(
-    Font(R.font.rubik_regular),
-    Font(R.font.rubik_bold, FontWeight.Bold)
+val Poppins = FontFamily(
+    Font(R.font.poppins_regular),
+    Font(R.font.poppins_bold, FontWeight.Bold)
 )
 // Set of Material typography styles to start with
 fun getTypography(font: FontFamily) = Typography(
