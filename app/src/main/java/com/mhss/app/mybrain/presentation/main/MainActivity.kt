@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.app.ActivityCompat
@@ -25,6 +26,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mhss.app.mybrain.domain.use_case.notes.NoteFolderDetailsScreen
+import com.mhss.app.mybrain.domain.model.TimerState
 import com.mhss.app.mybrain.presentation.bookmarks.BookmarkDetailsScreen
 import com.mhss.app.mybrain.presentation.bookmarks.BookmarkSearchScreen
 import com.mhss.app.mybrain.presentation.bookmarks.BookmarksScreen
@@ -41,9 +43,11 @@ import com.mhss.app.mybrain.presentation.settings.ImportExportScreen
 import com.mhss.app.mybrain.presentation.tasks.TaskDetailScreen
 import com.mhss.app.mybrain.presentation.tasks.TasksScreen
 import com.mhss.app.mybrain.presentation.tasks.TasksSearchScreen
+import com.mhss.app.mybrain.presentation.timer.TimerScreen
+import com.mhss.app.mybrain.presentation.timer.TimerViewModel
 import com.mhss.app.mybrain.presentation.util.Screen
 import com.mhss.app.mybrain.ui.theme.MyBrainTheme
-import com.mhss.app.mybrain.ui.theme.Rubik
+import com.mhss.app.mybrain.ui.theme.Poppins
 import com.mhss.app.mybrain.util.Constants
 import com.mhss.app.mybrain.util.settings.StartUpScreenSettings
 import com.mhss.app.mybrain.util.settings.ThemeSettings
@@ -58,13 +62,15 @@ import kotlinx.coroutines.runBlocking
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+    private val timerViewModel: TimerViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             val themeMode = viewModel.themeMode.collectAsState(initial = ThemeSettings.AUTO.value)
-            val font = viewModel.font.collectAsState(initial = Rubik.toInt())
+            val font = viewModel.font.collectAsState(initial = Poppins.toInt())
             val blockScreenshots = viewModel.blockScreenshots.collectAsState(initial = false)
             var startUpScreenSettings by remember { mutableStateOf(StartUpScreenSettings.SPACES.value) }
             val systemUiController = rememberSystemUiController()
@@ -104,6 +110,8 @@ class MainActivity : ComponentActivity() {
             }
             MyBrainTheme(darkTheme = isDarkMode, fontFamily = font.value.toFontFamily()) {
                 val navController = rememberNavController()
+                val timerViewModel: TimerViewModel = timerViewModel
+                val timerState by timerViewModel.timerState.observeAsState(TimerState())
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -117,6 +125,15 @@ class MainActivity : ComponentActivity() {
                                 startUpScreen = startUpScreen,
                                 mainNavController = navController
                             )
+                        }
+                        composable(Screen.SpacesScreen.route) {
+                            SpacesScreen(navController = navController)
+                        }
+                        composable(Screen.DashboardScreen.route) {
+                            DashboardScreen(navController = navController)
+                        }
+                        composable(Screen.SettingsScreen.route) {
+                            SettingsScreen(navController = navController)
                         }
                         composable(
                             Screen.TasksScreen.route,
@@ -183,25 +200,9 @@ class MainActivity : ComponentActivity() {
                         composable(Screen.NoteSearchScreen.route) {
                             NotesSearchScreen(navController = navController)
                         }
-                        composable(Screen.DiaryScreen.route) {
-                            DiaryScreen(navController = navController)
-                        }
-                        composable(Screen.DiaryChartScreen.route) {
-                            DiaryChartScreen()
-                        }
-                        composable(Screen.DiarySearchScreen.route) {
-                            DiarySearchScreen(navController = navController)
-                        }
-                        composable(
-                            Screen.DiaryDetailScreen.route,
-                            arguments = listOf(navArgument(Constants.DIARY_ID_ARG) {
-                                type = NavType.IntType
-                            })
-                        ) {
-                            DiaryEntryDetailsScreen(
-                                navController = navController,
-                                it.arguments?.getInt(Constants.DIARY_ID_ARG)!!
-                            )
+
+                        composable(Screen.TimerScreen.route) {
+                            TimerScreen(navController = navController, timerState = timerState, timerActions = timerViewModel)
                         }
                         composable(Screen.BookmarksScreen.route) {
                             BookmarksScreen(navController = navController)
