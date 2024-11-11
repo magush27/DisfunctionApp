@@ -283,71 +283,90 @@ private fun TimerPicker(
     timeText: String,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        val textStyle = MaterialTheme.typography.h3
+        val textStyle = MaterialTheme.typography.h6
+
+        // State holders for each time unit
         var hour by rememberSaveable(stateSaver = TextFieldValue.Saver) {
             mutableStateOf(TextFieldValue(timeText.substringBefore(":")))
         }
         var minute by rememberSaveable(stateSaver = TextFieldValue.Saver) {
-            mutableStateOf(
-                TextFieldValue(timeText.substringAfter(":").substringBefore(':')),
-            )
+            mutableStateOf(TextFieldValue(timeText.substringAfter(":").substringBefore(':')))
         }
         var second by rememberSaveable(stateSaver = TextFieldValue.Saver) {
             mutableStateOf(TextFieldValue(timeText.substringAfterLast(":")))
         }
 
-        NumberPicker(
+        // Column for Hour Picker
+        Column(
             modifier = Modifier.weight(1f),
-            number = hour,
-            timeUnit = stringResource(id = R.string.hours),
-            onNumberChange = { value ->
-                if (value.text.checkNumberPicker(maxNumber = 99)) {
-                    hour = value
-                    timerActions.setHour(hour.text.parseInt())
-                    timerActions.setCountDownTimer()
-                }
-            },
-        )
+            horizontalAlignment = Alignment.CenterHorizontally  // Center the content horizontally within the column
+        ) {
+            NumberPicker(
+                number = hour,
+                timeUnit = stringResource(id = R.string.hours),
+                onNumberChange = { value ->
+                    if (value.text.checkNumberPicker(maxNumber = 99)) {
+                        hour = value
+                        timerActions.setHour(hour.text.parseInt())
+                        timerActions.setCountDownTimer()
+                    }
+                },
+            )
+        }
 
+        // Center text between pickers
         Text(
             modifier = Modifier.padding(top = 17.dp),
             text = ":",
             style = textStyle,
         )
 
-        NumberPicker(
+        // Column for Minute Picker
+        Column(
             modifier = Modifier.weight(1f),
-            number = minute,
-            timeUnit = stringResource(id = R.string.minutes),
-            onNumberChange = { value ->
-                if (value.text.checkNumberPicker(maxNumber = 59)) {
-                    minute = value
-                    timerActions.setMinute(minute.text.parseInt())
-                    timerActions.setCountDownTimer()
-                }
-            },
-        )
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            NumberPicker(
+                number = minute,
+                timeUnit = stringResource(id = R.string.minutes),
+                onNumberChange = { value ->
+                    if (value.text.checkNumberPicker(maxNumber = 59)) {
+                        minute = value
+                        timerActions.setMinute(minute.text.parseInt())
+                        timerActions.setCountDownTimer()
+                    }
+                },
+            )
+        }
 
+        // Center text between pickers
         Text(
             modifier = Modifier.padding(top = 17.dp),
             text = ":",
             style = textStyle,
         )
 
-        NumberPicker(
+        // Column for Second Picker
+        Column(
             modifier = Modifier.weight(1f),
-            number = second,
-            timeUnit = stringResource(id = R.string.seconds),
-            onNumberChange = { value ->
-                if (value.text.checkNumberPicker(59)) {
-                    second = value
-                    timerActions.setSecond(second.text.parseInt())
-                    timerActions.setCountDownTimer()
-                }
-            },
-        )
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            NumberPicker(
+                number = second,
+                timeUnit = stringResource(id = R.string.seconds),
+                onNumberChange = { value ->
+                    if (value.text.checkNumberPicker(59)) {
+                        second = value
+                        timerActions.setSecond(second.text.parseInt())
+                        timerActions.setCountDownTimer()
+                    }
+                },
+            )
+        }
     }
 }
 
@@ -377,7 +396,7 @@ private fun Timer(
         Text(
             modifier = Modifier,
             text = timeText,
-            style = MaterialTheme.typography.h3,
+            style = MaterialTheme.typography.h4,
             fontWeight = FontWeight.Light,
             color = Color.White  // Adjust color for readability
         )

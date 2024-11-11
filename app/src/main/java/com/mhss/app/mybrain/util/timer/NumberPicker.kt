@@ -22,6 +22,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
 
 @Composable
@@ -66,7 +67,7 @@ fun NumberPicker(
                 Text(
                     text = timeUnit,
                     style = MaterialTheme.typography.h6,
-                    modifier = Modifier.padding(start = dimensionResource(id = R.dimen._5sdp)),
+                    modifier = Modifier.padding(2.dp),
                 )
             },
             modifier = Modifier
