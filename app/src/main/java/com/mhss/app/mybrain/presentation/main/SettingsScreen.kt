@@ -1,13 +1,11 @@
 package com.mhss.app.mybrain.presentation.main
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +25,9 @@ import com.mhss.app.mybrain.presentation.settings.SettingsItemCard
 import com.mhss.app.mybrain.presentation.settings.SettingsViewModel
 import com.mhss.app.mybrain.presentation.util.Screen
 import com.mhss.app.mybrain.ui.theme.Black
+import com.mhss.app.mybrain.ui.theme.Candy
 import com.mhss.app.mybrain.ui.theme.Green
+import com.mhss.app.mybrain.ui.theme.HandShadows
 import com.mhss.app.mybrain.ui.theme.Poppins
 import com.mhss.app.mybrain.util.Constants
 import com.mhss.app.mybrain.util.settings.*
@@ -87,30 +87,6 @@ fun SettingsScreen(
                         )
                     }
                 }
-            }
-            item {
-                val screen = viewModel
-                    .getSettings(
-                        intPreferencesKey(Constants.DEFAULT_START_UP_SCREEN_KEY),
-                        StartUpScreenSettings.SPACES.value
-                    ).collectAsState(
-                        initial = StartUpScreenSettings.SPACES.value
-                    )
-                StartUpScreenSettingsItem(
-                    screen.value,
-                    {
-                        viewModel.saveSettings(
-                            intPreferencesKey(Constants.DEFAULT_START_UP_SCREEN_KEY),
-                            StartUpScreenSettings.SPACES.value
-                        )
-                    },
-                    {
-                        viewModel.saveSettings(
-                            intPreferencesKey(Constants.DEFAULT_START_UP_SCREEN_KEY),
-                            StartUpScreenSettings.DASHBOARD.value
-                        )
-                    }
-                )
             }
             item {
                 val screen = viewModel
@@ -195,31 +171,6 @@ fun SettingsScreen(
                     title = R.string.privacy_policy,
                     icon = R.drawable.ic_privacy,
                     link = Constants.PRIVACY_POLICY_LINK
-                )
-            }
-
-            item {
-                Text(
-                    text = stringResource(R.string.product),
-                    style = MaterialTheme.typography.h5,
-                    modifier = Modifier
-                        .padding(vertical = 16.dp, horizontal = 12.dp)
-                )
-            }
-
-            item {
-                SettingsBasicLinkItem(
-                    title = R.string.request_feature_report_bug,
-                    icon = R.drawable.ic_feature_issue,
-                    link = Constants.GITHUB_ISSUES_LINK
-                )
-            }
-
-            item {
-                SettingsBasicLinkItem(
-                    title = R.string.project_roadmap,
-                    icon = R.drawable.ic_roadmap,
-                    link = Constants.PROJECT_ROADMAP_LINK
                 )
             }
             item { Spacer(Modifier.height(60.dp)) }
@@ -331,6 +282,8 @@ fun AppFontSettingsItem(
     val fonts = listOf(
         FontFamily.Default,
         Poppins,
+        Candy,
+        HandShadows,
         FontFamily.Monospace,
         FontFamily.SansSerif
     )
@@ -397,6 +350,8 @@ fun BlockScreenshotsSettingsItem(
         )
         Switch(checked = block, onCheckedChange = {
             onBlockClick(it)
-        })
+        },     colors = SwitchDefaults.colors(
+            uncheckedThumbColor = Green
+        ))
     }
 }
