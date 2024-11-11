@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
@@ -27,7 +28,7 @@ fun SpaceRegularCard(
     onClick: () -> Unit = {}
 ) {
     Card(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier.padding(8.dp).fillMaxSize(),
         shape = RoundedCornerShape(25.dp),
         backgroundColor = backgroundColor,
         elevation = 12.dp
@@ -36,17 +37,18 @@ fun SpaceRegularCard(
             Modifier
                 .clickable { onClick() }
                 .aspectRatio(1.0f)
-                .padding(18.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
+                .padding(12.dp),
+            verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
                 modifier = Modifier
-                    .size(150.dp)
+                    .size(110.dp)
                     .align(Alignment.CenterHorizontally),
                 painter = painterResource(id = image),
                 contentDescription = title)
             Text(text = title,
+                overflow = TextOverflow.Ellipsis ,
                 style = MaterialTheme.typography.h5.copy(color = Color.White),
                 textAlign = TextAlign.Center)
         }
