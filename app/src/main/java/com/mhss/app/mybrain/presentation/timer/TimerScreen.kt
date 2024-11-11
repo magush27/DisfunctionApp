@@ -1,7 +1,5 @@
 package com.mhss.app.mybrain.presentation.timer
 
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -17,13 +15,11 @@ import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,14 +31,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.TimerState
-import com.mhss.app.mybrain.presentation.util.Screen
 import com.mhss.app.mybrain.ui.theme.Black
 import com.mhss.app.mybrain.ui.theme.Green
 import com.mhss.app.mybrain.ui.theme.MyBrainTheme
 import com.mhss.app.mybrain.ui.theme.Red
 import com.mhss.app.mybrain.util.timer.checkNumberPicker
-import com.mhss.app.mybrain.util.timer.BackgroundIndicator
-import com.mhss.app.mybrain.util.timer.ClockAppBar
 import com.mhss.app.mybrain.util.timer.ClockButton
 import com.mhss.app.mybrain.util.timer.NumberPicker
 import com.mhss.app.mybrain.util.timer.parseInt
@@ -51,28 +44,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.BottomCenter
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import kotlin.math.cos
-import kotlin.math.min
-import kotlin.math.sin
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
-import androidx.compose.ui.unit.Dp
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.animation.core.*
 import androidx.compose.runtime.getValue
 
