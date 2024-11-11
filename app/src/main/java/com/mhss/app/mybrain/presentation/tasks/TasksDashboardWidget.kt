@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.mhss.app.mybrain.R
 import com.mhss.app.mybrain.domain.model.Task
 import com.mhss.app.mybrain.ui.theme.Green
-import com.mhss.app.mybrain.ui.theme.LightGray
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -56,7 +55,7 @@ fun TasksDashboardWidget(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(stringResource(R.string.tasks), style = MaterialTheme.typography.body1)
+                Text(stringResource(R.string.tasks), style = MaterialTheme.typography.body1, color = Color.Black)
                 Icon(
                     painterResource(R.drawable.ic_add),
                     stringResource(R.string.add_event),
@@ -64,7 +63,8 @@ fun TasksDashboardWidget(
                         .size(18.dp)
                         .clickable {
                             onAddClick()
-                        }
+                        },
+                    tint = Color.Black
                 )
             }
             Spacer(Modifier.height(8.dp))
@@ -72,7 +72,7 @@ fun TasksDashboardWidget(
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(20.dp))
-                    .background(if (isDark) Color.Black else LightGray),
+                    .background(if (isDark) Color.Black else Color.Black),
                 contentPadding = PaddingValues(vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
