@@ -142,9 +142,9 @@ fun SpiralIndicator(
     // Animate the rotation smoothly
     val animatedRotation by animateFloatAsState(
 //        targetValue = 360f * progress,
-        targetValue = progress * 100f,
+        targetValue = progress * 30f,
         animationSpec = tween(
-            durationMillis = 500,
+            durationMillis = 800,
             easing = FastOutSlowInEasing
         )
     )
