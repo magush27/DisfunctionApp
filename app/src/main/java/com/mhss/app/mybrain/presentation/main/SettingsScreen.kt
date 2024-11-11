@@ -211,69 +211,6 @@ fun ThemeSettingsItem(theme: Int = 0, onClick: () -> Unit = {}) {
 }
 
 @Composable
-fun StartUpScreenSettingsItem(
-    screen: Int,
-    onSpacesClick: () -> Unit = {},
-    onDashboardClick: () -> Unit = {}
-) {
-    var expanded by remember { mutableStateOf(false) }
-    SettingsItemCard(
-        cornerRadius = 16.dp,
-        onClick = {
-            expanded = true
-        },
-    ) {
-        Text(
-            text = stringResource(R.string.start_up_screen),
-            style = MaterialTheme.typography.h6
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(),
-            contentAlignment = Alignment.CenterEnd
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = when (screen) {
-                        StartUpScreenSettings.SPACES.value -> stringResource(R.string.spaces)
-                        StartUpScreenSettings.DASHBOARD.value -> stringResource(R.string.dashboard)
-                        else -> stringResource(R.string.spaces)
-                    },
-                    style = MaterialTheme.typography.body1
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
-            }
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-            ) {
-                DropdownMenuItem(onClick = {
-                    onSpacesClick()
-                    expanded = false
-                }) {
-                    Text(
-                        text = stringResource(id = R.string.spaces),
-                        style = MaterialTheme.typography.body1
-                    )
-                }
-                DropdownMenuItem(onClick = {
-                    onDashboardClick()
-                    expanded = false
-                }) {
-                    Text(
-                        text = stringResource(id = R.string.dashboard),
-                        style = MaterialTheme.typography.body1
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
 fun AppFontSettingsItem(
     selectedFont: Int,
     onFontChange: (Int) -> Unit = {}
