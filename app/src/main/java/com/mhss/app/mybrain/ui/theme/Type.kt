@@ -51,7 +51,7 @@ fun getTypography(font: FontFamily) = Typography(
     ),
     h5 = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 24.sp
+        fontSize = 20.sp
     ),
     h6 = TextStyle(
         fontWeight = FontWeight.Normal,
