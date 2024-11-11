@@ -60,6 +60,7 @@ import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
@@ -68,6 +69,12 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
+import androidx.compose.ui.unit.Dp
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.focus.focusModifier
+import androidx.compose.animation.core.*
+import androidx.compose.runtime.getValue
 
 @OptIn(
     ExperimentalAnimationApi::class,
@@ -86,7 +93,7 @@ fun TimerScreen(
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
-                .imePadding(),
+                .imePadding().background(Black),
         ) {
             val timerPickerPaddingStart =
                 if (maxWidth > 400.dp) dimensionResource(id = R.dimen._30sdp) else 0.dp
@@ -127,7 +134,7 @@ fun TimerScreen(
                 ),
             ) {
                 Timer(
-                    modifier = Modifier.size(dimensionResource(id = R.dimen._268sdp)),
+                    modifier = Modifier.size(350.dp),
                     timeText = timerState.timeText,
                     progress = timerState.progress,
                 )
@@ -135,7 +142,7 @@ fun TimerScreen(
 
             Buttons(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
+                    .align(BottomCenter)
                     .padding(dimensionResource(id = R.dimen._7sdp)),
                 timerState = timerState,
                 timerActions = timerActions,
@@ -145,167 +152,86 @@ fun TimerScreen(
     }
 }
 
-
-//@Composable
-//fun SpiralIndicator(
-//    progress: Float,
-//    modifier: Modifier = Modifier,
-//    strokeWidthDp: Float = 6f,  // Use dp value here, which we'll convert to px
-//    spiralColor: Color = Color.Green,
-//    shadowColor: Color = Color.Gray,
-//    shadowOffset: Float = 10f
-//) {
-//
-//    Canvas(
-//        modifier = modifier
-//            // Apply rotation based on progress
-//            .graphicsLayer {
-//                // Progress ranges from 0 to 1, map it to 0 to 360 degrees
-//                rotationZ = 360f * progress
-//            }
-//    ) {
-//        // Get the width and height of the canvas
-//        val canvasWidth = size.width
-//        val canvasHeight = size.height
-//
-//        // Parameters for the spiral
-//        val centerX = canvasWidth / 2
-//        val centerY = canvasHeight / 2
-//        val maxRadius = min(canvasWidth, canvasHeight) / 2 * 0.8f  // Control the spiral size
-//
-//        // Spiral equation: r = a + b * θ (polar coordinates)
-//        val a = 5f
-//        val b = 15f
-//
-//        // Path to draw the spiral
-//        val path = Path().apply {
-//            moveTo(centerX, centerY)
-//
-//            // Draw a spiral based on progress
-//            for (angle in 0 until (360 * 5)) {  // 5 turns of spiral
-//                val theta = Math.toRadians(angle.toDouble())
-//                val radius = a + b * theta
-//
-//                val x = centerX + radius * cos(theta).toFloat()
-//                val y = centerY + radius * sin(theta).toFloat()
-//
-//                if (angle == 0) {
-//                    moveTo(x.toFloat(), y.toFloat())
-//                } else {
-//                    lineTo(x.toFloat(), y.toFloat())
-//                }
-//
-//                // Stop drawing when the progress is met
-//                if (angle >= (progress * 360 * 5).toInt()) break
-//            }
-//        }
-//
-//        // Draw shadow
-//        drawPath(
-//            path = path,
-//            color = shadowColor,
-//            style = Stroke(width = 6f, cap = StrokeCap.Round),  // Slightly thicker for shadow
-//        )
-//
-//        // Draw the spiral
-//        drawPath(
-//            path = path,
-//            color = spiralColor,
-//            style = Stroke(width = 6f, cap = StrokeCap.Round),
-//        )
-//    }
-//}
-
 @Composable
 fun SpiralIndicator(
-    progress: Float,
+    progress: Float,  // Progress value between 0 and 1
     modifier: Modifier = Modifier,
-    strokeWidthDp: Float = 6f,
-    spiralColor: Color = Color.Green,
-    shadowColor: Color = Color.Green.copy(alpha = 0.3f),  // Add transparency for a softer shadow effect
-    shadowOffset: Float = 10f
+    strokeWidth: Float,
+    color: Color = Color.Green
 ) {
-    val density = LocalDensity.current
+    val canvasSize = 300.dp  // Set the canvas size
 
-    // Convert dp values to pixels
-    val strokeWidthPx = with(density) { strokeWidthDp.dp.toPx() }
-    val shadowOffsetPx = with(density) { shadowOffset.dp.toPx() }  // Convert shadow offset to px
+    // Animate the rotation smoothly
+    val animatedRotation by animateFloatAsState(
+//        targetValue = 360f * progress,
+        targetValue = progress * 100f,
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = FastOutSlowInEasing
+        )
+    )
+
+    // Animate the number of segments to be drawn smoothly
+    val animatedProgress by animateFloatAsState(
+//        targetValue = progress,
+        targetValue = progress.coerceIn(0f, 1f),
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = FastOutSlowInEasing
+        )
+    )
 
     Canvas(
         modifier = modifier
+            .size(canvasSize)
             .graphicsLayer {
-                rotationZ = 360f * progress
+                rotationZ += animatedRotation  // Apply animated rotation
             }
     ) {
-        val canvasWidth = size.width
-        val canvasHeight = size.height
+        val centerX = size.width / 2
+        val centerY = size.height / 2
 
-        // Center of the canvas
-        val centerX = canvasWidth / 2
-        val centerY = canvasHeight / 2
+        // Define max step size for the spiral (ensure it fits inside the canvas)
+        val maxStep = minOf(size.width, size.height) / 5
 
-        // Spiral parameters
-        val a = 5f
-        val b = 15f
-
-        // Path for the shadow, offset by `shadowOffsetPx`
-        val shadowPath = Path().apply {
-            moveTo(centerX + shadowOffsetPx, centerY + shadowOffsetPx)
-
-            for (angle in 0 until (360 * 5)) {  // Draw 5 turns of the spiral
-                val theta = Math.toRadians(angle.toDouble())
-                val radius = a + b * theta
-
-                val x = centerX + radius * cos(theta).toFloat() + shadowOffsetPx
-                val y = centerY + radius * sin(theta).toFloat() + shadowOffsetPx
-
-                if (angle == 0) {
-                    moveTo(x.toFloat(), y.toFloat())
-                } else {
-                    lineTo(x.toFloat(), y.toFloat())
-                }
-
-                if (angle >= (progress * 360 * 5).toInt()) break
-            }
-        }
-
-        // Draw shadow path
-        drawPath(
-            path = shadowPath,
-            color = shadowColor,
-            style = Stroke(width = strokeWidthPx, cap = StrokeCap.Round)
-        )
-
-        // Path for the main spiral
-        val mainPath = Path().apply {
+        // Path for the square spiral
+        val path = Path().apply {
             moveTo(centerX, centerY)
 
-            for (angle in 0 until (360 * 5)) {
-                val theta = Math.toRadians(angle.toDouble())
-                val radius = a + b * theta
+            var step = 100f  // Initial step size
+            var currentX = centerX
+            var currentY = centerY
+            var direction = 0
 
-                val x = centerX + radius * cos(theta).toFloat()
-                val y = centerY + radius * sin(theta).toFloat()
-
-                if (angle == 0) {
-                    moveTo(x.toFloat(), y.toFloat())
-                } else {
-                    lineTo(x.toFloat(), y.toFloat())
+            // Loop to create segments outward in a square spiral pattern
+            val segmentsToDraw = (animatedProgress * 10).toInt()  // Control the number of steps based on animated progress
+            for (i in 0 until segmentsToDraw) {  // Control the number of steps being drawn gradually
+                when (direction % 4) {
+                    0 -> currentX = (currentX + step).coerceAtMost(size.width)
+                    1 -> currentY = (currentY + step).coerceAtMost(size.height)
+                    2 -> currentX = (currentX - step).coerceAtLeast(0f)
+                    3 -> currentY = (currentY - step).coerceAtLeast(0f)
                 }
 
-                if (angle >= (progress * 360 * 5).toInt()) break
+                lineTo(currentX, currentY)
+
+                // Increase the step size every 2 iterations to make the spiral expand
+                if (i % 2 == 1) {
+                    step += maxStep
+                }
+
+                direction++
             }
         }
 
-        // Draw the main spiral path
+        // Draw the square spiral path with the animated progress
         drawPath(
-            path = mainPath,
-            color = spiralColor,
-            style = Stroke(width = strokeWidthPx, cap = StrokeCap.Round)
+            path = path,
+            color = color,
+            style = Stroke(width = strokeWidth, cap = StrokeCap.Round, join = StrokeJoin.Round)
         )
     }
 }
-
 
 @Composable
 private fun TimerAppBar(modifier: Modifier = Modifier, navController: NavHostController) {
@@ -414,26 +340,32 @@ private fun Timer(
     timeText: String,
     progress: Float,
 ) {
-    Box(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .wrapContentHeight()  // Use only one size modifier to prevent conflicts
+            .fillMaxWidth(),  // Fill the width, adjust based on your layout needs
+        horizontalAlignment = Alignment.CenterHorizontally  // Center items horizontally
+    ) {
+        // Spiral Indicator at the top
         SpiralIndicator(
             progress = progress,
-            modifier = modifier
-                .fillMaxSize()
-                .scale(scaleX = 1f, scaleY = 1f),
-            strokeWidthDp = 6f,
-            spiralColor = Color.Green,
-           // shadowColor = Color.Black.copy(alpha = 0.3f),  // Adjust shadow transparency
-            shadowOffset = 10f
+            modifier = Modifier.size(250.dp),  // Ensure a consistent size for the spiral
+            strokeWidth = 50f,
+            color = Color.Green,
         )
+
+        Spacer(modifier = Modifier.height(50.dp))  // You can increase this value to adjust spacing
+
+        // Text below the spiral
         Text(
-            modifier = Modifier.align(Center).background(Black),
+            modifier = Modifier,
             text = timeText,
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.Light,
+            color = Color.White  // Adjust color for readability
         )
     }
 }
-
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun Buttons(
@@ -442,7 +374,7 @@ private fun Buttons(
     timerActions: TimerActions,
     isDoneTransition: Transition<Boolean>,
 ) {
-    Box(modifier = modifier.padding(bottom = 30.dp)) {
+    Box(modifier = modifier.padding(bottom = 50.dp)) {
         isDoneTransition.AnimatedVisibility(
             visible = { isTimerDone -> isTimerDone },
             enter = expandHorizontally(
@@ -463,7 +395,7 @@ private fun Buttons(
                 contentDescription = stringResource(R.string.start),
                 onClick = { timerActions.start() },
                 enabled = timerState.timeInMillis != 0L,
-                )
+            )
         }
 
         isDoneTransition.AnimatedVisibility(
@@ -523,7 +455,7 @@ private fun TimerScreenPreview() {
     }
 }
 
-@Preview(device = Devices.TABLET, uiMode = ORIENTATION_PORTRAIT, widthDp = 768, heightDp = 1024)
+//@Preview(device = Devices.TABLET, uiMode = ORIENTATION_PORTRAIT, widthDp = 768, heightDp = 1024)
 @Composable
 private fun TimerScreenDarkPreview() {
     MyBrainTheme(darkTheme = true) {
@@ -534,4 +466,3 @@ private fun TimerScreenDarkPreview() {
         )
     }
 }
-

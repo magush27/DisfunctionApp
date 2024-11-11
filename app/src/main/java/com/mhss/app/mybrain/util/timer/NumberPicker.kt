@@ -31,7 +31,7 @@ fun NumberPicker(
     timeUnit: String,
     onNumberChange: (TextFieldValue) -> Unit,
     textStyle: androidx.compose.ui.text.TextStyle = MaterialTheme.typography.h3,
-    backgroundColor: Color = MaterialTheme.colors.surface,
+    backgroundColor: Color = Color.Black,
 ) {
     val numericKeyboard = KeyboardOptions(keyboardType = KeyboardType.Number)
     val textFieldColors = TextFieldDefaults.textFieldColors(
