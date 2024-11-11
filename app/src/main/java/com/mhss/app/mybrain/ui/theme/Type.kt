@@ -39,15 +39,15 @@ fun getTypography(font: FontFamily) = Typography(
     ),
     h2 = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 60.sp
+        fontSize = 45.sp
     ),
     h3 = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 48.sp
+        fontSize = 38.sp
     ),
     h4 = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 34.sp
+        fontSize = 30.sp
     ),
     h5 = TextStyle(
         fontWeight = FontWeight.Normal,
@@ -55,7 +55,7 @@ fun getTypography(font: FontFamily) = Typography(
     ),
     h6 = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 20.sp
+        fontSize = 15.sp
     ),
     subtitle1 = TextStyle(
         fontWeight = FontWeight.Normal,
