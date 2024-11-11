@@ -12,6 +12,12 @@ val Poppins = FontFamily(
     Font(R.font.poppins_regular),
     Font(R.font.poppins_bold, FontWeight.Bold)
 )
+val Candy = FontFamily(
+    Font(R.font.candy)
+)
+val HandShadows = FontFamily(
+    Font(R.font.hand_shadows)
+)
 // Set of Material typography styles to start with
 fun getTypography(font: FontFamily) = Typography(
     defaultFontFamily = font,
