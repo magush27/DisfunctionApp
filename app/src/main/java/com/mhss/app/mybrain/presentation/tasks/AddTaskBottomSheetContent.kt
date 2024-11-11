@@ -107,13 +107,10 @@ val songs = listOf(
                 "Delicado y espera\n" +
                 "Dame tiempo para darte\n" +
                 "Todo lo que tengo\n" +
-                "Julieta Venegas - Lento")
+                "Julieta Venegas - Lento"),
+    Song("La vida pasa rápido, puta, tic-tac",
+        "Dillom")
 )
-
-// Select random song
-fun getRandomSong(): Song {
-    return songs.random()
-}
 
 @Composable
 fun AddTaskBottomSheetContent(
@@ -337,11 +334,12 @@ fun AddTaskBottomSheetContent(
             onClick = {
                 if (songs.isNotEmpty()) {
                     val selectedSong = songs.random() // Select a random song
+                    val randomPriority = priorities.random() // Select random priority
                     onAddTask(
                         Task(
                             title = selectedSong.phrase, // Replace with song phrase
                             description = selectedSong.artist, // Replace with song author
-                            priority = priority.toInt(),
+                            priority = randomPriority.toInt(),
                             dueDate = if (dueDateExists) dueDate.timeInMillis else 0L,
                             recurring = recurring,
                             frequency = frequency,
