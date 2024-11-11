@@ -142,8 +142,10 @@ fun Int.toFontFamily(): FontFamily {
     return when (this) {
         0 -> FontFamily.Default
         1 -> Poppins
-        2 -> FontFamily.Monospace
-        3 -> FontFamily.SansSerif
+        2 -> Candy
+        3 -> HandShadows
+        4 -> FontFamily.Monospace
+        5 -> FontFamily.SansSerif
         else -> FontFamily.Default
     }
 }
@@ -152,8 +154,10 @@ fun FontFamily.toInt(): Int {
     return when (this) {
         FontFamily.Default -> 0
         Poppins -> 1
-        FontFamily.Monospace -> 2
-        FontFamily.SansSerif -> 3
+        Candy -> 2
+        HandShadows -> 3
+        FontFamily.Monospace -> 4
+        FontFamily.SansSerif -> 5
         else -> 0
     }
 }
@@ -162,6 +166,8 @@ fun FontFamily.getName(): String {
     return when (this) {
         FontFamily.Default -> getString(R.string.font_system_default)
         Poppins -> "Poppins"
+        Candy -> "Candy"
+        HandShadows -> "HandShadows"
         FontFamily.Monospace -> "Monospace"
         FontFamily.SansSerif -> "Sans Serif"
         else -> getString(R.string.font_system_default)
