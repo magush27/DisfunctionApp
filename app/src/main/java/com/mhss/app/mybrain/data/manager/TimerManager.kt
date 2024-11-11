@@ -129,7 +129,7 @@ class TimerManager @Inject constructor(
     private fun calculateFluctuationRange(millisUntilFinished: Long): Long {
         return when {
             millisUntilFinished < 60_000 -> 3000L  // 1 second fluctuation for times under 1 minute
-            millisUntilFinished < 3600_000 -> 10000L  // 5 seconds fluctuation for times under 1 hour
+            millisUntilFinished < 3600_000 -> 100000L  // 5 seconds fluctuation for times under 1 hour
             millisUntilFinished < 24 * 3600_000 -> 30_000L  // 30 seconds fluctuation for times under 1 day
             else -> 60_000L  // 1 minute fluctuation for times above 1 day
         }

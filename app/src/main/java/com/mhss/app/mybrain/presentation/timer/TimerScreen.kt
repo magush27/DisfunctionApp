@@ -54,6 +54,38 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.animation.core.*
 import androidx.compose.runtime.getValue
 
+/*
+ ░▒▓██████▓▒░  ░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓███████▓▒░      ░▒▓████████▓▒░ ░▒▓███████▓▒░░▒▓████████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░        ░▒▓██████▓▒░  ░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░             ░▒▓█▓▒░       ░▒▓█▓▒░          ░▒▓█▓▒░    ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░             ░▒▓█▓▒░       ░▒▓█▓▒░          ░▒▓█▓▒░    ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░
+░▒▓████████▓▒░░▒▓█▓▒▒▓███▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░       ░▒▓██████▓▒░   ░▒▓██████▓▒░    ░▒▓█▓▒░    ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓████████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░      ░▒▓█▓▒░              ░▒▓█▓▒░   ░▒▓█▓▒░    ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░      ░▒▓█▓▒░              ░▒▓█▓▒░   ░▒▓█▓▒░    ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░
+░▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░  ░▒▓██████▓▒░ ░▒▓███████▓▒░       ░▒▓████████▓▒░░▒▓███████▓▒░    ░▒▓█▓▒░     ░▒▓██████▓▒░    ░▒▓██▓▒░    ░▒▓██████▓▒░       ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░  ░▒▓██████▓▒░ ░▒▓█▓▒░
+                                                                                                                                                                         ░▒▓█▓▒░
+         __,aaPPPPPPPPaa,__
+         ,adP"""'          `""Yb,_
+      ,adP'                     `"Yb,
+    ,dP'     ,aadPP"""""YYba,_     `"Y,
+   ,P'    ,aP"'            `""Ya,     "Y,
+  ,P'    aP'     _________     `"Ya    `Yb,
+ ,P'    d"    ,adP""""""""Yba,    `Y,    "Y,
+,d'   ,d'   ,dP"            `Yb,   `Y,    `Y,
+d'   ,d'   ,d'    ,dP""Yb,    `Y,   `Y,    `b
+8    d'    d'   ,d"      "b,   `Y,   `8,    Y,
+8    8     8    d'    _   `Y,   `8    `8    `b
+8    8     8    8     8    `8    8     8     8
+8    Y,    Y,   `b, ,aP     P    8    ,P     8
+I,   `Y,   `Ya    """"     d'   ,P    d"    ,P
+`Y,   `8,    `Ya         ,8"   ,P'   ,P'    d'
+ `Y,   `Ya,    `Ya,,__,,d"'   ,P'   ,P"    ,P
+  `Y,    `Ya,     `""""'     ,P'   ,d"    ,P'
+   `Yb,    `"Ya,_          ,d"    ,P'    ,P'
+     `Yb,      ""YbaaaaaadP"     ,P'    ,P'
+       `Yba,                   ,d'    ,dP'
+          `"Yba,__       __,adP"     dP"                                                                                                                                                                   ░▒▓██▓▒░
+ */
+
 @OptIn(
     ExperimentalAnimationApi::class,
 )
@@ -150,12 +182,19 @@ fun SpiralIndicator(
     )
 
     // Animate the number of segments to be drawn smoothly
+//    val animatedProgress by animateFloatAsState(
+////        targetValue = progress,
+//        targetValue = progress.coerceIn(0f, 1f),
+//        animationSpec = tween(
+//            durationMillis = 500,
+//            easing = FastOutSlowInEasing
+//        )
+//    )
     val animatedProgress by animateFloatAsState(
-//        targetValue = progress,
         targetValue = progress.coerceIn(0f, 1f),
         animationSpec = tween(
-            durationMillis = 500,
-            easing = FastOutSlowInEasing
+            durationMillis = 2000,  // Duración ajustable para el dibujo
+            easing = LinearEasing  // Easing lineal para un dibujo uniforme
         )
     )
 
