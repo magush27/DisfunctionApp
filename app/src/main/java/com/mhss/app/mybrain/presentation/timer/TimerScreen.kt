@@ -433,7 +433,7 @@ private fun TimerScreenPreview() {
     }
 }
 
-//@Preview(device = Devices.TABLET, uiMode = ORIENTATION_PORTRAIT, widthDp = 768, heightDp = 1024)
+@Preview(device = Devices.TABLET, widthDp = 768, heightDp = 1024)
 @Composable
 private fun TimerScreenDarkPreview() {
     MyBrainTheme(darkTheme = true) {
