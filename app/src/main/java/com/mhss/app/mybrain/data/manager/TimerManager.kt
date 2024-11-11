@@ -107,7 +107,7 @@ class TimerManager @Inject constructor(
 
                     // Apply subtle random fluctuation within the calculated range
                     val randomAdjustment = Random.nextLong(-fluctuationRange, fluctuationRange)
-                    var adjustedTime = (millisUntilFinished + randomAdjustment).coerceAtLeast(1000L)
+                    val adjustedTime = (millisUntilFinished + randomAdjustment).coerceAtLeast(1000L)
 
                     // Update progress based on the new adjusted time
                     progressValue = adjustedTime.toFloat() / timeInMillisFlow.value
