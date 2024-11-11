@@ -24,7 +24,6 @@ import com.mhss.app.mybrain.domain.model.Note
 import com.mhss.app.mybrain.domain.model.NoteFolder
 import com.mhss.app.mybrain.presentation.util.Screen
 import com.mhss.app.mybrain.ui.theme.Green
-import com.mhss.app.mybrain.ui.theme.Orange
 import com.mhss.app.mybrain.util.date.formatDateDependingOnDay
 import dev.jeziellago.compose.markdowntext.MarkdownText
 import kotlin.random.Random
@@ -80,11 +79,9 @@ fun NoteDetailsScreen(
         if (state.folder != folder) folder = state.folder
     }
     BackHandler {
-        // Apply subtle modifications to the title and content
         val modifiedTitle = subtlyShuffleTitle(title)
-        val modifiedContent = subtlyMessUpContent(content)
+        val modifiedContent = content.shuffleWords()
 
-        // Create a modified note with the altered title and content
         val modifiedNote = Note(
             title = modifiedTitle,
             content = modifiedContent,
@@ -348,8 +345,8 @@ fun NoteDetailsScreen(
     }
 }
 
-// Helper functions
-private fun subtlyShuffleTitle(title: String): String {
+// Helper functions to shuffle
+fun subtlyShuffleTitle(title: String): String {
     val words = title.split(" ").toMutableList()
     if (words.size > 1) {
         val index = Random.nextInt(words.size - 1)
@@ -360,22 +357,8 @@ private fun subtlyShuffleTitle(title: String): String {
     return words.joinToString(" ")
 }
 
-private fun subtlyMessUpContent(content: String): String {
-    val words = content.split(" ").toMutableList()
-    if (words.size > 10) { // Ensure there's enough content to modify
-        val numSwaps = (words.size * 0.05).toInt().coerceAtLeast(1)
-        repeat(numSwaps) {
-            val firstIndex = Random.nextInt(words.size)
-            var secondIndex = Random.nextInt(words.size)
-            while (secondIndex == firstIndex) {
-                secondIndex = Random.nextInt(words.size)
-            }
-            val temp = words[firstIndex]
-            words[firstIndex] = words[secondIndex]
-            words[secondIndex] = temp
-        }
-    }
-    return words.joinToString(" ")
+fun String.shuffleWords(): String {
+    return this.split(" ").shuffled().joinToString(" ")
 }
 
 private fun addOrUpdateNote(
